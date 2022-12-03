@@ -16,5 +16,5 @@ exports.getRegister = (req, res, next) => {
 exports.postRegister = (req, res, next) => {
   let obj = req.body;
   console.log(obj);
-  console.log(obj.isadmin.value);
+  // console.log(obj.isadmin.value);
 };

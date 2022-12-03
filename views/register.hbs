@@ -1,18 +1,18 @@
-<h1 class="my-5 text-center">
+<h1 class="my-5 text-center text-light">
   Register
 </h1>
 
-<div class="w-50 p-3 m-auto">
+<div class="w-50 p-3 m-auto text-light">
   <form class="mx-1 mx-md-4" action="/user/register" method="POST">
 
     <div class="d-flex flex-row align-items-center mb-4">
-      <i class="fas fa-user fa-lg me-3 fa-fw"></i>
       <div class="form-outline flex-fill mb-0">
         <input
           type="text"
           id="name"
           name="name"
           class="form-control"
+          placeholder="Name"
           required
         />
         <label class="form-label" for="name">Your Name</label>
@@ -20,13 +20,13 @@
     </div>
 
     <div class="d-flex flex-row align-items-center mb-4">
-      <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
       <div class="form-outline flex-fill mb-0">
         <input
           type="email"
           id="email"
           name="email"
           class="form-control"
+          placeholder="Email"
           required
         />
         <label class="form-label" for="email">Your Email</label>
@@ -34,20 +34,19 @@
     </div>
 
     <div class="d-flex flex-row align-items-center mb-4">
-      <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
       <div class="form-outline flex-fill mb-0">
         <input
           type="password"
           id="password"
           name="password"
           class="form-control"
+          placeholder="Password"
         />
         <label class="form-label" for="password">Password</label>
       </div>
     </div>
 
     <div class="d-flex flex-row align-items-center mb-4">
-      <i class="fas fa-key fa-lg me-3 fa-fw w-10"></i>
 
       <div class="form-outline flex-fill mb-0">
         <input
@@ -55,35 +54,23 @@
           id="password1"
           name="password1"
           class="form-control"
+          placeholder="Confirm Password"
         />
         <label class="form-label" for="password1">Confirm your password</label>
       </div>
     </div>
 
-    <div class="d-flex flex-row align-items-center mb-4">
-      <i class="fas fa-key fa-lg me-3 fa-fw w-10"></i>
-      <div class="form-outline flex-fill mb-0">
-        <input
-          name="isadmin"
-          class="form-check-input"
-          type="checkbox"
-          id="flexCheckDefault"
-        />
-        <label class="form-check-label" for="flexCheckDefault">
-          Is admin?
-        </label>
-      </div>
-
+    <div class="d-flex justify-content-start mb-5">
+      <p class="me-2">Already Registerd?</p>
+      <a
+        href="/user/login"
+        class="link-warning fw-bold"
+        style="text-decoration: none;"
+      >
+        Login here</a>
     </div>
 
-    <div class="form-check d-flex justify-content-start mb-5">
-
-      <a href="/user/login" class="link-primary">Already Registerd? Login here</a>
-    </div>
-
-    <div class="d-flex justify-content-start mx-4 mb-3 mb-lg-4">
-      <button type="submit" class="btn btn-primary btn-lg">Register</button>
-    </div>
+    <button type="submit" class="btn btn-warning btn-lg">Register</button>
 
   </form>
 </div>

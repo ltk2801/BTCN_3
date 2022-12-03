@@ -15,11 +15,21 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css"
     />
+    {{!-- CSS --}}
+    <style>
+      a:hover {
+        font-weight: bold;
+      }
+    </style>
 
   </head>
-  <body style="background-color: #f8f9fa">
-    {{>nav}}
-    {{>content}}
+  <body style="background-color: #212529">
+
+        {{>header}} 
+      {{>nav}}
+      {{>content}}
+      {{>footer}}
+  
     <!-- JavaScript Bundle with Popper -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
