@@ -5,6 +5,7 @@ const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
 const flash = require("connect-flash");
 const mainM = require("./models/main.m");
+const film = require("./models/film");
 
 const homeRoutes = require("./routes/home");
 const userRoutes = require("./routes/user");
@@ -35,6 +36,27 @@ app.use((req, res, next) => {
     .findEmail(req.session.user.f_Email)
     .then((user) => {
       req.user = user[0];
+      next();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+// Import Data to database
+app.use((req, res, next) => {
+  film
+    .addDataFilms()
+    .then((result) => {
+      next();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+app.use((req, res, next) => {
+  film
+    .addDataCasts()
+    .then((result) => {
       next();
     })
     .catch((err) => {
