@@ -5,7 +5,7 @@ module.exports = (app) => {
     session({
       secret: "my secret",
       resave: false,
-      saveUninitialized: true,
+      saveUninitialized: false,
       cookie: { secure: false },
     })
   );

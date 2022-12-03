@@ -1,10 +1,30 @@
+{{#if errorMessage}}
+  <div class="alert alert-danger" role="alert">
+    <h3 class="text-center fw-bold">
+      {{errorMessage}}
+    </h3>
+
+  </div>
+
+{{/if}}
+
+{{#if reportMessage}}
+  <div class="alert alert-success" role="alert">
+    <h3 class="text-center fw-bold">
+      {{reportMessage}}
+    </h3>
+
+  </div>
+
+{{/if}}
+
 <div class="my-5 text-light">
   <h1 class="my-5 text-center">
     Login
   </h1>
 
   <div class="w-50 p-3 m-auto text-light">
-    <form class="mx-1 mx-md-4" action="/user/register" method="POST">
+    <form class="mx-1 mx-md-4" action="/user/login" method="POST">
 
       <div class="d-flex flex-row align-items-center mb-4">
         <div class="form-outline flex-fill mb-0">
@@ -14,6 +34,7 @@
             name="email"
             class="form-control"
             placeholder="Email"
+            value="{{c_email}}"
             required
           />
           <label class="form-label" for="email">Your Email</label>
@@ -28,6 +49,7 @@
             name="password"
             class="form-control"
             placeholder="Password"
+            value="{{c_password}}"
           />
           <label class="form-label" for="password">Password</label>
         </div>

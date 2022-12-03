@@ -1,11 +1,11 @@
 const { pgp, db } = require("../config/postgres");
 
-exports.authHaveUser = (req, res, next) => {
-  if (req.session.uid) {
-    console.log(req.session.uid);
-    next();
+exports.authHaveUser = async function (req, res, next) {
+  if (!req.session.isLoggedIn) {
+    // return res.redirect("/404");
+    console.log("chưa đăng nhập");
   } else {
-    console.log(req.session.uid);
-    console.log(req.cookies);
+    console.log("Đã đăng nhập rồi");
   }
+  next();
 };

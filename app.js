@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
 const flash = require("connect-flash");
+const mainM = require("./models/main.m");
 
 const homeRoutes = require("./routes/home");
 const userRoutes = require("./routes/user");
@@ -25,6 +26,21 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(flash());
+
+app.use((req, res, next) => {
+  if (!req.session.user) {
+    return next();
+  }
+  mainM
+    .findEmail(req.session.user.f_Email)
+    .then((user) => {
+      req.user = user[0];
+      next();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
 
 app.use(homeRoutes);
 app.use("/user", userRoutes);
