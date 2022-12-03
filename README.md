@@ -1,2 +1,2 @@
 # BTCN_3
-# NPM INSTALL => NPM START
+# npm install -> npm start
