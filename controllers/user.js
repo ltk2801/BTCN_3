@@ -95,9 +95,9 @@ exports.postLogin = async function (req, res, next) {
   mainM
     .findEmail(emailUser)
     .then((user) => {
-      if (!user) {
+      if (user.length == 0) {
         req.flash("error", "Invalid email or password !");
-        return res.redirect("/login");
+        return res.redirect("/user/login");
       }
       bcrypt
         .compare(passwordUser, user[0].f_Password)

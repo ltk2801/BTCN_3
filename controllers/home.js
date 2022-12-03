@@ -1,6 +1,6 @@
 const filmPage = require("../models/film");
 
-exports.getHome = (req, res, next) => {
+exports.getHome = async function (req, res, next) {
   let user = req.user;
   let nameUser;
 
@@ -9,21 +9,15 @@ exports.getHome = (req, res, next) => {
   } else {
     nameUser = null;
   }
+  const moviesComing = await filmPage.getDataFilmComing();
+  const tamp = await filmPage.getDataFilmRating();
+  const moviesRating = tamp.reverse();
+
   res.render("home", {
     pageTitle: "Home",
     haveUser: req.session.isLoggedIn,
     nameUser: nameUser,
+    moviesComing: moviesComing,
+    moviesRating: moviesRating,
   });
-  // filmPage
-  //   .addDataFilms()
-  //   .then((result) => {
-  //     res.render("home", {
-  //       pageTitle: "Home",
-  //       haveUser: req.session.isLoggedIn,
-  //       nameUser: nameUser,
-  //     });
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
-  //   });
 };

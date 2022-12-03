@@ -1,4 +1,34 @@
 <div class="p-5 my-5">
-  <h1 class="mb-3 text-light">Home</h1>
+  <h1 class="mb-3 text-light">Coming soon</h1>
+  <div class="row align-items-stretch gy-5">
+    {{#each moviesComing}}
+      <div class="col-3" style="height:100% ;">
+        <img
+          src="{{this.img}}"
+          alt="abc"
+          class="img-fluid"
+          style="height:500px"
+        />
+        <div class="text-center bg-white mt-1 border border-info text-dark p-3">
+          <h6>{{this.title}} </h6>
+          <span> ( {{this.year}} )</span>
+        </div>
+      </div>
+    {{/each}}
 
+  </div>
+  <h1 class="mb-5 mt-5 text-light">Top Rating</h1>
+  <div class="row align-items-stretch gap-3 gy-5 justify-content-center">
+    {{#each moviesRating}}
+      <div class="col-2" style="height:100% ">
+        <img src="{{this.img}}" alt="abc" class="img-fluid h-75 w-100" />
+        <div class="text-center bg-white mt-1 border border-info text-dark p-3">
+          <h6>{{this.title}} </h6>
+          <span> ( {{this.year}} )</span>
+          <p class="fw-bold text-primary"> Rating : {{this.rating}} / 10</p>
+        </div>
+      </div>
+    {{/each}}
+
+  </div>
 </div>

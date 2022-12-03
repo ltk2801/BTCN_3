@@ -7,9 +7,17 @@ exports.addDataFilms = async function () {
   const haveData = await db.any('select * from public."Films"');
   if (haveData.length == 0) {
     dataFilm.map(async (data) => {
+      let hasProfanity = null;
+      let language = null;
+      let text = null;
+      if (data.synopses) {
+        hasProfanity = data.synopses.hasProfanity;
+        language = data.synopses.language;
+        text = data.synopses.text;
+      }
       const rs = await db.any(
-        `insert into public.\"Films\"(\"id\",\"img\", \"title\", \"year\", \"topRank\", \"rating\", \"ratingCount\",\"genres\")
-                            VALUES ($1, $2, $3, $4,$5,$6,$7,$8) returning *`,
+        `insert into public.\"Films\"(\"id\",\"img\", \"title\", \"year\", \"topRank\", \"rating\", \"ratingCount\",\"genres\",\"hasProfanity\",\"language\",\"text\")
+                              VALUES ($1, $2, $3, $4,$5,$6,$7,$8,$9,$10,$11) returning *`,
         [
           data.id,
           data.img,
@@ -19,6 +27,9 @@ exports.addDataFilms = async function () {
           data.rating,
           data.ratingCount,
           data.genres,
+          hasProfanity,
+          language,
+          text,
         ]
       );
     });
@@ -47,4 +58,18 @@ exports.addDataCasts = async function () {
       );
     });
   }
+};
+
+exports.getDataFilmComing = async function () {
+  const rs = await db.any(
+    'select * from public."Films" order by rating desc limit 7'
+  );
+  return rs;
+};
+
+exports.getDataFilmRating = async function () {
+  const rs = await db.any(
+    'select * from public."Films" order by rating  limit 40'
+  );
+  return rs;
 };
