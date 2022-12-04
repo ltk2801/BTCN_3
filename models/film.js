@@ -2,6 +2,7 @@ const { pgp, db } = require("../config/postgres");
 
 const dataFilm = require("../data/movies.json");
 const dataCast = require("../data/casts.json");
+const filmM = require("../models/film");
 
 exports.addDataFilms = async function () {
   const haveData = await db.any('select * from public."Films"');
@@ -143,4 +144,40 @@ exports.getDataFilmRating = async function () {
 exports.findIdMovie = async function (id) {
   const rs = await db.any('select * from public."Films"where"id"like $1', [id]);
   return rs;
+};
+
+exports.findIdCast = async function (id) {
+  const rs = await db.any('select * from public."Casts"where"id"like $1', [id]);
+  return rs;
+};
+
+exports.findCharCast = async function (idM, idC) {
+  const rs = await db.any(
+    'select * from public."FilmsCasts" where "ID_film" = $1 and "ID_cast" = $2',
+    [idM, idC]
+  );
+  return rs;
+};
+
+exports.getCastFilm = async function (id) {
+  const rs = await db.any(
+    'select * from public."FilmsCasts"where"ID_film"like $1',
+    [id]
+  );
+  return rs;
+};
+
+exports.findCasts = async function (arr) {
+  const casts = arr.map(async (obj) => {
+    const data = await filmM.findIdCast(obj.ID_cast);
+    const char = await filmM.findCharCast(obj.ID_film, obj.ID_cast);
+
+    data[0].character = char[0].characters_cast;
+    return data[0];
+  });
+  return Promise.all(casts);
+};
+
+exports.getCharacters = async function (arr) {
+  const casts = arr.map(async (obj) => {});
 };

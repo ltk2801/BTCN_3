@@ -40,6 +40,13 @@ exports.getMovie = async function (req, res, next) {
   }
   const movieId = req.params.movieId;
   let textMovie;
+  let castArr = await filmPage.getCastFilm(movieId);
+  let castInfoArr = await filmPage.findCasts(castArr);
+
+  let casts = castInfoArr.slice(1, 200);
+
+  // console.log(casts);
+
   filmPage
     .findIdMovie(movieId)
     .then((m) => {
@@ -56,6 +63,7 @@ exports.getMovie = async function (req, res, next) {
         haveUser: req.session.isLoggedIn,
         nameUser: nameUser,
         text: textMovie,
+        castsMovie: casts,
         reportMessage: report,
       });
     })

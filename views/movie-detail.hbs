@@ -62,8 +62,24 @@
     {{/if}}
   </div>
 </div>
-<h2>Một số diễn viên chính</h2>
-<div class="grid-popular-film">
+<h2 class="text-light my-4">Một số diễn viên chính</h2>
+
+<div class="row">
+   {{#each castsMovie}}
+   {{#if this.img}}
+      <div class="col-3 g-5">
+        
+          <img src="{{this.img}}" alt="" class="img-fluid" >
+          <h6 class="text-center text-light">
+            <p> {{this.name}}  </p>
+            <p> {{this.character}} </p>
+
+          </h6>
+      </div>
+    {{/if}}
+    {{/each}}
+</div>
+ 
   {{!-- <div v-for="(actor,index) in store.curP.actorList" :key="actor.id">
   <div v-if="index < 21">
     <img
