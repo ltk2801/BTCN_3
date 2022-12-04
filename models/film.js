@@ -60,6 +60,73 @@ exports.addDataCasts = async function () {
   }
 };
 
+exports.addDataFilmCasts = async function () {
+  const haveData = await db.any('select * from public."FilmsCasts"');
+  if (haveData.length == 0) {
+    dataFilm.map(async (data) => {
+      let idC = "";
+      let nameC = "";
+      let charactersC = "";
+      // console.log(data.casts.length !== 0);
+      if (data.casts.length != 0) {
+        data.casts.map(async (dataC) => {
+          idC = dataC.id;
+          nameC = dataC.name;
+          charactersC = dataC.characters;
+
+          const rs = await db.any(
+            `insert into public.\"FilmsCasts\"(\"ID_film\", \"ID_cast\", \"name_cast\", \"characters_cast\")
+                                  VALUES ($1, $2, $3, $4) returning *`,
+            [data.id, idC, nameC, charactersC]
+          );
+        });
+      }
+    });
+  }
+};
+
+exports.addDataFilmReview = async function () {
+  const haveData = await db.any('select * from public."FilmsReviews"');
+  if (haveData.length == 0) {
+    dataFilm.map(async (data) => {
+      if (data.reviews.length != 0) {
+        // console.log(data.reviews);
+        data.reviews.map(async (dataR) => {
+          let up = 0;
+          let down = 0;
+          const { interestingVotes } = dataR;
+          if (interestingVotes && Object.keys(interestingVotes).length !== 0) {
+            if (interestingVotes.down) {
+              down = interestingVotes.down;
+            }
+            if (interestingVotes.up) {
+              up = interestingVotes.up;
+            }
+          }
+
+          const rs = await db.any(
+            `insert into public.\"FilmsReviews\"(\"ID_film\", \"name_author\", \"authorRating\", \"helpfulnessScore\", \"interestingVotes_D\", \"interestingVotes_U\", \"reviewText\", \"reviewTitle\", \"submissionDate\")
+                                  VALUES ($1, $2, $3, $4,$5,$6,$7,$8,$9) returning *`,
+            [
+              data.id,
+              dataR.author,
+              dataR.authorRating,
+              dataR.helpfulnessScore,
+              down,
+              up,
+              dataR.languageCode,
+              dataR.reviewText,
+              dataR.reviewTitle,
+              dataR.submissionDate,
+            ]
+          );
+          // console.log(dataR);
+        });
+      }
+    });
+  }
+};
+
 exports.getDataFilmComing = async function () {
   const rs = await db.any(
     'select * from public."Films" order by rating desc limit 7'

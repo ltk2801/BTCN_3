@@ -64,6 +64,28 @@ app.use((req, res, next) => {
     });
 });
 
+app.use((req, res, next) => {
+  film
+    .addDataFilmCasts()
+    .then((result) => {
+      next();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+app.use((req, res, next) => {
+  film
+    .addDataFilmReview()
+    .then((result) => {
+      next();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
 // locals
 app.use((req, res, next) => {
   res.locals.haveUser = req.session.isLoggedIn;
