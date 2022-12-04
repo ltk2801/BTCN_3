@@ -4,9 +4,17 @@
   </div>
 
   {{#if haveUser}}
+    <button class="btn btn-success" style="width:20% ;" type="button">
+      <a
+        href="/user/movies"
+        class="text-light"
+        style="text-decoration: none;"
+      >List Favorite Movies</a>
+    </button>
     <div class="text-end d-flex justify-content-end gap-4">
 
       <h3>Xin chào {{nameUser}}</h3>
+
       <form action="/user/logout" method="POST">
         <button class="btn btn-success text-light" type="submit">
           Logout

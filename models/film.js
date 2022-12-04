@@ -73,3 +73,8 @@ exports.getDataFilmRating = async function () {
   );
   return rs;
 };
+
+exports.findIdMovie = async function (id) {
+  const rs = await db.any('select * from public."Films"where"id"like $1', [id]);
+  return rs;
+};

@@ -1,0 +1,82 @@
+<div class="row my-4 text-light">
+  <div class="col-4">
+    <img src="{{movie.img}}" alt="{{movie.id}}" class="img-fluid" />
+  </div>
+  <div class="col-8">
+    <h2 class="fw-bold">{{movie.title}}</h2>
+    <div class="row gap-2">
+      <span class="col-5"><strong>Genres:</strong> {{movie.genres}}</span>
+      <span class="col-5"><strong>Year : </strong>{{movie.year}}</span>
+      <span class="col-5"><strong>Top Rank : </strong>{{movie.topRank}}</span>
+      <span class="col-5"><strong>Rating : </strong>{{movie.rating}}/10*</span>
+      <span class="col-5"><strong>RatingCount : </strong>
+        {{movie.ratingCount}}</span>
+      <span class="col-5"><strong>HasProfanity: </strong>
+        {{#if movie.hasProfanity}}
+          Yes
+        {{else}}
+          No
+        {{/if}}
+      </span>
+      <span class="col-12"><strong>Language: </strong>{{movie.language}}</span>
+      <span class="col-12"><strong>Story : </strong>{{text}} ...</span>
+      <span class="col-3 mt-3">
+        <button type="button" class="btn btn-warning px-4 py-2">
+          Xem Phim
+        </button>
+      </span>
+      {{#if haveUser}}
+        <span class="col-3 mt-3">
+          <form action="/user/movies" method="POST">
+            <button type="submit" class="btn btn-warning px-4 py-2">
+              Yêu thích &nbsp;
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-heart-fill"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
+                ></path>
+              </svg>
+            </button>
+            <input type="hidden" name="movieId" value="{{movie.id}}" />
+          </form>
+
+        </span>
+      {{/if}}
+    </div>
+
+    {{#if reportMessage}}
+      <div class="alert alert-success" role="alert">
+        <h3 class="text-center fw-bold">
+          {{reportMessage}}
+        </h3>
+
+      </div>
+
+    {{/if}}
+  </div>
+</div>
+<h2>Một số diễn viên chính</h2>
+<div class="grid-popular-film">
+  {{!-- <div v-for="(actor,index) in store.curP.actorList" :key="actor.id">
+  <div v-if="index < 21">
+    <img
+      :src="actor.image"
+      :alt="actor.id"
+      class="img-popular-film"
+      ="$emit('selectIdActor',actor.id)"
+    />
+    <h6 class="text-center">
+      <span> {{actor.name}} / </span>
+      <span> {{actor.asCharacter}} </span>
+    </h6>
+  </div>
+  </div> --}}
+
+</div>

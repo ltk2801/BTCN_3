@@ -64,6 +64,12 @@ app.use((req, res, next) => {
     });
 });
 
+// locals
+app.use((req, res, next) => {
+  res.locals.haveUser = req.session.isLoggedIn;
+  next();
+});
+
 app.use(homeRoutes);
 app.use("/user", userRoutes);
 

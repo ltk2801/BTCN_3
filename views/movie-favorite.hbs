@@ -1,0 +1,76 @@
+<div class="p-5 my-5">
+     {{#if reportMessage}}
+      <div class="alert alert-success" role="alert">
+        <h3 class="text-center fw-bold">
+          {{reportMessage}}
+        </h3>
+
+      </div>
+
+    {{/if}}
+  <h1 class="mb-5 text-light">List movies Favorite</h1>
+  {{#if isHaveMovies}}
+    <div class="row align-items-stretch gy-5">
+      {{#each movies}}
+        <div class="col-3" style="height:100% ;">
+          <a href="/movies/{{this.id}}">
+            <img
+              src="{{this.img}}"
+              alt="abc"
+              class="img-fluid"
+              style="height:500px;width:100%"
+            />
+          </a>
+
+          <div
+            class="text-center bg-white mt-1 border border-info text-dark p-3"
+          >
+            <a
+              href="/movies/{{this.id}}"
+              style="text-decoration: none;"
+              class="text-dark"
+            >
+              <h6>{{this.title}} </h6>
+            </a>
+            <span> ( {{this.year}} )</span>
+          </div>
+          <form action="/user/deletemovie" method="POST">
+          <input type="hidden" value="{{this.id}}" name="movieId" />
+          <button class="btn btn-success text-light" type="submit">Delete</button>
+        </div>
+        
+
+        </form>
+      {{/each}}
+    </div>
+  {{else}}
+    <h1 class="mb-3 text-warning">You don't have any movies favorite </h1>
+  {{/if}}
+  {{!-- <div class="row align-items-stretch gy-5">
+    {{#each moviesComing}}
+      <div class="col-3" style="height:100% ;">
+        <a href="/movies/{{this.id}}">
+          <img
+            src="{{this.img}}"
+            alt="abc"
+            class="img-fluid"
+            style="height:500px;width:100%"
+          />
+        </a>
+
+        <div class="text-center bg-white mt-1 border border-info text-dark p-3">
+          <a
+            href="/movies/{{this.id}}"
+            style="text-decoration: none;"
+            class="text-dark"
+          >
+            <h6>{{this.title}} </h6>
+          </a>
+          <span> ( {{this.year}} )</span>
+        </div>
+      </div>
+    {{/each}}
+
+  </div> --}}
+
+</div>
