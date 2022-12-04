@@ -120,7 +120,6 @@ exports.addDataFilmReview = async function () {
               dataR.submissionDate,
             ]
           );
-          // console.log(dataR);
         });
       }
     });
